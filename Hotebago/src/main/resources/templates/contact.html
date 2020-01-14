@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>Hotebago</title>
+<style>
+body {
+	background-color: #ffebcd;
+}
+
+h1 {
+	color: #6666CC;
+	text-align: center;
+}
+
+img {
+	width: 50px;
+	height: 50px;
+	margin-top: 20px;
+}
+
+.text {
+	font-size: 20px;
+}
+
+#submit {
+	text-align: center;
+}
+
+#back {
+	font-size: 25px;
+	background-color: #ffebcd;
+	color: #6666CC;
+	border-style: none;
+	margin-top: 20px;
+}
+
+#twitter {
+	background-color: white;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+</style>
+</head>
+<body>
+	<h1>CONTACT</h1>
+	<div class="text">掲載情報の不足・間違い・その他ご要望などございましたら、お気軽にご連絡の方お願いします。</div>
+	<div class="text">下記アイコンより管理人Twitter・GitHubへアクセスできます。</div>
+	<a href="https://twitter.com/w6_og"><img id="twitter"
+		src="Twitter_Logo_Blue.png"></a>
+	<a href="https://github.com/ayato042"><img
+		src="icons8-ios-用塗りつぶしアイコン-50.png"></a>
+
+	<div id="submit">
+		<form th:action="@{/return}" method="get">
+			<input id="back" type="submit" value="検索へ戻る">
+		</form>
+
+	</div>
+	<script>
+		$(function() {
+			$('input, a').hover(function() {
+				$(this).css("cursor", "pointer");
+			});
+		});
+	</script>
+</body>
+</html>

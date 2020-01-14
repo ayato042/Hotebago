@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>Hotebago</title>
+<style>
+body {
+	background-color: #ffebcd;
+}
+
+h1 {
+	font-size: 40px;
+	color: #6666CC;
+	padding-top: 10px;
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+	font-size: 30px;
+}
+
+div {
+	text-align: center;
+}
+
+.contents {
+	display: flex;
+	justify-content: space-between;
+}
+
+.result {
+	font-size: 25px;
+	color: #da70d6;
+}
+
+.move {
+	padding-top: 10px;
+}
+
+.rank {
+	font-size: 30px;
+	margin-top: 10px;
+}
+
+.hotel {
+	padding-top: 10px;
+}
+
+.price {
+	font-size: 23px;
+}
+
+#sidebar {
+	width: 250px;
+	height: 100%;
+	position: fixed;
+	color: #033560;
+	background: #fff;
+	text-align: center;
+	display: none;
+}
+
+#category {
+	font-size: 30px;
+	color: black;
+}
+
+#back1 {
+	font-size: 25px;
+	color: black;
+	font-weight: bold;
+	text-align: right;
+	margin-top: 30px;
+	margin-right: 30px;
+}
+
+#back {
+	font-size: 30px;
+	background-color: #ffebcd;
+	color: #6666CC;
+	border-style: none;
+	margin-top: 20px;
+}
+
+#avg {
+	color: #222222;
+}
+
+#cheapest {
+	font-weight: bold;
+	color: #6927FF;
+}
+
+#bottom {
+	border-bottom: dashed 2px #6594e0;
+}
+
+#form {
+	font-size: 25px;
+	background-color: #ffebcd;
+	border-style: none;
+	margin-top: 20px;
+	text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<aside id="sidebar">
+		<h1 id="category">Category</h1>
+		<ul class="sub-menu-nav">
+			<li id="all">All</li>
+			<li id="action">Action</li>
+			<li id="horror">Horror</li>
+			<li id="drama">Drama</li>
+			<li id="sf">SF</li>
+		</ul>
+		<div id="back1">Back</div>
+	</aside>
+	<h1>検索結果</h1>
+	<div class="contents">
+		<div class="content">
+			<form th:action="@{/result}" method="post" th:object="${info}">
+				<div class="move">
+					<input type="hidden" name="place" th:value="*{place}"> <input
+						type="hidden" name="time" th:value="*{time} - 1"> <input
+						type="hidden" name="date" th:value="*{date}"> <input
+						type="hidden" name="type" th:value="*{type}"> ←<input
+						id="form" type="submit" th:value="*{time} - 1 + '時'">
+				</div>
+			</form>
+		</div>
+		<div class="content">
+			<h2 th:text="${info.time} + '時からのご利用'"></h2>
+		</div>
+		<div class="content">
+			<form th:action="@{/result}" method="post" th:object="${info}">
+				<div class="move">
+					<input type="hidden" name="place" th:value="*{place}"> <input
+						type="hidden" name="date" th:value="*{date}"> <input
+						type="hidden" name="time" th:value="*{time} + 1"> <input
+						type="hidden" name="type" th:value="*{type}"> <input
+						id="form" type="submit" th:value="*{time} + 1 + '時'">→
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="avg">※価格は平均価格になります</div>
+	<div id="cheapest" class="rank">最安値</div>
+	<div class="hotel">
+		<div class="result" th:text="${result1}"></div>
+		<div class="price" th:text="'￥' + ${price1}"></div>
+	</div>
+	<div class="rank">2位</div>
+	<div class="hotel">
+		<div class="result" th:text="${result2}"></div>
+		<div class="price" th:text="'￥' + ${price2}"></div>
+	</div>
+	<div class="rank">3位</div>
+	<div class="hotel">
+		<div class="result" th:text="${result3}"></div>
+		<div class="price" th:text="'￥' + ${price3}"></div>
+	</div>
+	<div id="bottom">
+		<form th:action="@{/return}" method="get">
+			<input id="back" type="submit" value="検索へ戻る">
+		</form>
+	</div>
+	<form th:action="@{/contact}" method="get">
+		<div>
+			<input id="form" type="submit" value="CONTACT">
+		</div>
+	</form>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		$(function() {
+			$('input, img').hover(function() {
+				$(this).css("cursor", "pointer");
+			});
+		});
+	</script>
+</body>
+</html>

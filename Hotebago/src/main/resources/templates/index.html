@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>Hotebago</title>
+<style>
+body {
+	background-color: #ffebcd;
+}
+
+h1 {
+	font-size: 40px;
+	color: #6666CC;
+	text-align: center;
+	padding-top: 10px;
+}
+
+div {
+	text-align: center;
+}
+
+select {
+	font-size: 25px;
+}
+
+.subject {
+	font-size: 25px;
+	padding-top: 20px;
+}
+
+#submit {
+	font-size: 30px;
+	background-color: #ffebcd;
+	color: #6666CC;
+	border-style: none;
+	margin-top: 20px;
+}
+
+#error {
+	color: red;
+	opacity: 0.7;
+	font-size: 20px;
+}
+
+#bottom {
+	border-bottom: dashed 2px #6594e0;
+}
+
+#form {
+	font-size: 25px;
+	background-color: #ffebcd;
+	border-style: none;
+	margin-top: 20px;
+	text-decoration: underline;
+}
+
+/* 以下selectボックスcss */
+.cp_ipselect {
+	overflow: hidden;
+	width: 30%;
+	margin: 10px auto;
+	text-align: center;
+}
+
+.cp_ipselect select {
+	width: 100%;
+	padding-right: 1em;
+	cursor: pointer;
+	text-indent: 0.01px;
+	border: none;
+	outline: none;
+	background: transparent;
+	background-image: none;
+	box-shadow: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.cp_ipselect select::-ms-expand {
+	display: none;
+}
+
+.cp_ipselect.cp_sl02 {
+	position: relative;
+	border: 1px solid #bbbbbb;
+	border-radius: 2px;
+	background: #ffffff;
+}
+
+.cp_ipselect.cp_sl02::before {
+	position: absolute;
+	top: 0.8em;
+	right: 0.9em;
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #666666;
+	pointer-events: none;
+}
+
+.cp_ipselect.cp_sl02:after {
+	position: absolute;
+	top: 0;
+	right: 2.5em;
+	bottom: 0;
+	width: 1px;
+	content: '';
+	border-left: 1px solid #bbbbbb;
+}
+
+.cp_ipselect.cp_sl02 select {
+	padding: 8px 38px 8px 8px;
+	color: #666666;
+}
+</style>
+</head>
+<body>
+	<h1>ホテル最安値検索</h1>
+	<form th:action="@{/result}" method="post">
+		<div class="subject">エリア</div>
+		<div class="cp_ipselect cp_sl02">
+			<select id="place" name="place">
+				<option value="yokohama">横浜</option>
+			</select>
+		</div>
+		<div class="subject">曜日</div>
+		<div class="cp_ipselect cp_sl02">
+			<select id="date" name="date">
+				<option value="weekday">日〜木</option>
+				<option value="friday">金</option>
+				<option value="weekend">土・祝前</option>
+			</select>
+		</div>
+		<div class="subject">時間</div>
+		<div id="error" th:text="${error}"></div>
+		<div class="cp_ipselect cp_sl02">
+			<select id="time" name="time">
+				<option th:value="${date}">現在時刻</option>
+				<option value="15">15:00〜</option>
+				<option value="17">17:00〜</option>
+				<option value="18">18:00〜</option>
+				<option value="19">19:00〜</option>
+				<option value="20">20:00〜</option>
+				<option value="21">21:00〜</option>
+				<option value="22">22:00〜</option>
+				<option value="23">23:00〜</option>
+				<option value="24">24:00〜</option>
+				<option value="25">25:00〜</option>
+			</select>
+		</div>
+		<div class="subject">利用プラン</div>
+		<div class="cp_ipselect cp_sl02">
+			<select id="type" name="type">
+				<option value="stay">宿泊</option>
+			</select>
+		</div>
+		<div id="bottom">
+			<input id="submit" type="submit" value="最安値を検索">
+		</div>
+	</form>
+	<div>
+		<form th:action="@{/contact}" method="get">
+			<input id="form" type="submit" value="CONTACT">
+		</form>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		$(function() {
+			$('input, select').hover(function() {
+				$(this).css("cursor", "pointer");
+			});
+		});
+	</script>
+</body>
+</html>
